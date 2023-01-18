@@ -5,15 +5,21 @@ import Header from './MyComponents/Header'; //Brackets not put since the export 
 import {Todos} from './MyComponents/Todos';
 import {Footer} from './MyComponents/Footer';
 import {AddTodo} from './MyComponents/AddTodo';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  let initTodo;
+  if(localStorage.getItem("todos") === null){
+    initTodo = []
+  }
+  else{
+    initTodo = JSON.parse(localStorage.getItem("todos"))
+  }
   const onDelete = (todo) => {
-    // let index = todos.indexOf(todo);
-    // todos.splice(index, 1);
     setTodos(todos.filter((e)=>{
       return e!==todo;
     }))
+    localStorage.setItem("todos", JSON.stringify(todos))
   }
 
   const addTodo = (title, desc) => {
@@ -22,24 +28,11 @@ function App() {
       title: title,
       desc: desc 
     }))
+
+    localStorage.setItem("todos", JSON.stringify(todos))
+    
   }
-  const [todos, setTodos] = useState([
-    {
-      sno:1,
-      title: "Go to market",
-      desc: "Go to market to get job done"
-    },
-    {
-      sno:2,
-      title: "Go to mall",
-      desc: "Go to mall to get job done"
-    },
-    {
-      sno:3,
-      title: "Go to shop",
-      desc: "Go to shop to get job done"
-    }
-  ])
+  const [todos, setTodos] = useState(initTodo)
   return (
     <>
       <Header title={"My Todos List"} searchBar={true}/>
