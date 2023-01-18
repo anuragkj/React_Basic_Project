@@ -29,10 +29,15 @@ function App() {
       desc: desc 
     }))
 
-    localStorage.setItem("todos", JSON.stringify(todos))
+    
+    
+    
     
   }
   const [todos, setTodos] = useState(initTodo)
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
   return (
     <>
       <Header title={"My Todos List"} searchBar={true}/>

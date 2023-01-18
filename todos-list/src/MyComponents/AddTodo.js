@@ -9,7 +9,12 @@ export const AddTodo = (props) => {
     if(!title || !desc){
         alert("Title or description can't be left blank")
     }
+    else
+    {
     props.addTodo(title, desc)
+    setDesc("")
+    setTitle("")
+    }
   }
   return (
     <div className="container-sm my-3">
