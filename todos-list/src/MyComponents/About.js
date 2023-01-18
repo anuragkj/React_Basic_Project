@@ -2,7 +2,7 @@ import React from 'react'
 
 export const About = () => {
     let myStyle = {
-        height : "85vh",
+        height : "90vh",
       }
   return (
     <>
