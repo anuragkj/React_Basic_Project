@@ -5,7 +5,9 @@ import Header from './MyComponents/Header'; //Brackets not put since the export 
 import {Todos} from './MyComponents/Todos';
 import {Footer} from './MyComponents/Footer';
 import {AddTodo} from './MyComponents/AddTodo';
+import {About} from './MyComponents/About';
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom";
 
 function App() {
   let initTodo;
@@ -40,10 +42,26 @@ function App() {
   }, [todos])
   return (
     <>
+    <Router>
       <Header title={"My Todos List"} searchBar={true}/>
-      <AddTodo addTodo={addTodo}/>
-      <Todos todos={todos} onDelete={onDelete}/>
+      <Switch>
+        <Route exact path="/" render = {()=>{
+          return(
+            <div>
+              <AddTodo addTodo={addTodo}/>
+              <Todos todos={todos} onDelete={onDelete}/>
+            </div>
+          )
+        }}>
+        </Route>
+
+        <Route exact path="/about">
+          <About/>
+        </Route>
+      </Switch>
+      
       <Footer/>
+    </Router>
     </>
     
   );
