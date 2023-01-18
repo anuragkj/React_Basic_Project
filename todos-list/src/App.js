@@ -4,6 +4,7 @@ import './App.css';
 import Header from './MyComponents/Header'; //Brackets not put since the export function is default not named
 import {Todos} from './MyComponents/Todos';
 import {Footer} from './MyComponents/Footer';
+import {AddTodo} from './MyComponents/AddTodo';
 import React, { useState } from 'react';
 
 function App() {
@@ -12,6 +13,14 @@ function App() {
     // todos.splice(index, 1);
     setTodos(todos.filter((e)=>{
       return e!==todo;
+    }))
+  }
+
+  const addTodo = (title, desc) => {
+    setTodos(todos.concat({
+      sno: todos.length>0 ? todos[todos.length-1].sno + 1 : 1,
+      title: title,
+      desc: desc 
     }))
   }
   const [todos, setTodos] = useState([
@@ -34,6 +43,7 @@ function App() {
   return (
     <>
       <Header title={"My Todos List"} searchBar={true}/>
+      <AddTodo addTodo={addTodo}/>
       <Todos todos={todos} onDelete={onDelete}/>
       <Footer/>
     </>
