@@ -2,12 +2,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Header from './MyComponents/Header'; //Brackets not put since the export function is default not named
-import {Todos} from './MyComponents/Todos';
+// import {Todos} from './MyComponents/Todos';
 import {Footer} from './MyComponents/Footer';
-import {AddTodo} from './MyComponents/AddTodo';
+// import {AddTodo} from './MyComponents/AddTodo';
 import {About} from './MyComponents/About';
+import {Home} from './MyComponents/Home';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   let initTodo;
@@ -44,21 +45,12 @@ function App() {
     <>
     <Router>
       <Header title={"My Todos List"} searchBar={false}/>
-      <Switch>
-        <Route exact path="/" render = {()=>{
-          return(
-            <div>
-              <AddTodo addTodo={addTodo}/>
-              <Todos todos={todos} onDelete={onDelete}/>
-            </div>
-          )
-        }}>
-        </Route>
+      <Routes>
+        <Route exact path="/" element = {<Home addTodo = {addTodo} todos={todos} onDelete={onDelete}/>}/>
 
-        <Route exact path="/about">
-          <About/>
-        </Route>
-      </Switch>
+        <Route exact path="/about" element={<About/>}/>
+          
+      </Routes>
       
       <Footer/>
     </Router>
